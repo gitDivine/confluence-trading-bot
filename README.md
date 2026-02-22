@@ -100,13 +100,12 @@ C:\Users\<YOU>\AppData\Roaming\MetaQuotes\Terminal\<TERMINAL_ID>\MQL5\
 
 ### 2. Copy files
 
-Copy the project folders into your MT5 data folder:
+After cloning or downloading this repo, copy the two folders into the `MQL5` folder you just opened:
 
-```
-# From this repo:
-Include/Confluence/*.mqh  →  MQL5/Include/Confluence/*.mqh
-Experts/ConfluenceTradingSystem.mq5  →  MQL5/Experts/ConfluenceTradingSystem.mq5
-```
+1. Copy the **`Include`** folder from this repo into `MQL5\` (so you end up with `MQL5\Include\Confluence\*.mqh`)
+2. Copy the **`Experts`** folder from this repo into `MQL5\` (so you end up with `MQL5\Experts\ConfluenceTradingSystem.mq5`)
+
+If the folders already exist in your MT5, just merge/overwrite when prompted.
 
 ### 3. Add symbols to Market Watch
 
