@@ -64,6 +64,22 @@ public:
       // Normalize to broker constraints
       lots = NormalizeLots(symbol, lots);
 
+      // Cap to what free margin can actually support (use 80% of free margin max)
+      double freeMargin = AccountInfoDouble(ACCOUNT_MARGIN_FREE);
+      double marginRequired = 0;
+      ENUM_ORDER_TYPE orderType = (entry > sl) ? ORDER_TYPE_BUY : ORDER_TYPE_SELL;
+      if(OrderCalcMargin(orderType, symbol, lots, entry, marginRequired))
+      {
+         if(marginRequired > freeMargin * 0.80)
+         {
+            double safeLots = lots * (freeMargin * 0.80) / marginRequired;
+            safeLots = NormalizeLots(symbol, safeLots);
+            m_log.Warning(StringFormat("%s: lot size capped from %.2f to %.2f (margin limit)",
+                          symbol, lots, safeLots));
+            lots = safeLots;
+         }
+      }
+
       return lots;
    }
 
